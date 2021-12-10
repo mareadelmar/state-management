@@ -6,9 +6,21 @@ class ClassState extends React.Component {
 
 		this.state = {
 			error: false,
-			name: "holis",
+			loading: false,
 		};
 	} // --> ?? error acá
+
+	componentDidUpdate() {
+		console.log("esto se va a ejecutar");
+
+		if (!!this.state.loading) {
+			setTimeout(() => {
+				this.setState({
+					loading: false,
+				});
+			}, 2000);
+		}
+	}
 
 	render() {
 		return (
@@ -17,12 +29,14 @@ class ClassState extends React.Component {
 
 				{this.state.error && <p>Error: el código es incorrecto</p>}
 
+				{this.state.loading && <p>Cargando...</p>}
+
 				<p>Por favor escribe el código de seguridad</p>
 				<input type='text' placeholder='Código de seguridad' />
 				<button
 					onClick={() =>
 						this.setState({
-							error: !this.state.error,
+							loading: true,
 						})
 					}
 				>
