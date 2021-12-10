@@ -1,6 +1,7 @@
 import React from "react";
 
 class ClassState extends React.Component {
+	// estados compuestos o dependientes
 	constructor(props) {
 		super(props);
 
