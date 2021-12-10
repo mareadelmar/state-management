@@ -1,5 +1,7 @@
 import React from "react";
 
+const SECURITY_CODE = "paradigma";
+
 class ClassState extends React.Component {
 	// estados compuestos o dependientes
 	constructor(props) {
@@ -8,6 +10,7 @@ class ClassState extends React.Component {
 		this.state = {
 			error: false,
 			loading: false,
+			inputValue: "",
 		};
 	} // --> ?? error acá
 
@@ -16,9 +19,11 @@ class ClassState extends React.Component {
 
 		if (!!this.state.loading) {
 			setTimeout(() => {
-				this.setState({
-					loading: false,
-				});
+				if (this.state.inputValue !== SECURITY_CODE) {
+					this.setState({ error: true, loading: false });
+					return;
+				}
+				this.setState({ error: false, loading: false });
 			}, 2000);
 		}
 	}
@@ -28,12 +33,23 @@ class ClassState extends React.Component {
 			<div>
 				<h2>Eliminar ClassState</h2>
 
-				{this.state.error && <p>Error: el código es incorrecto</p>}
+				{this.state.error && !this.state.loading && (
+					<p>Error: el código es incorrecto</p>
+				)}
 
 				{this.state.loading && <p>Cargando...</p>}
 
 				<p>Por favor escribe el código de seguridad</p>
-				<input type='text' placeholder='Código de seguridad' />
+				<input
+					type='text'
+					placeholder='Código de seguridad'
+					value={this.state.inputValue}
+					onChange={e =>
+						this.setState({
+							inputValue: e.target.value,
+						})
+					}
+				/>
 				<button
 					onClick={() =>
 						this.setState({
