@@ -89,6 +89,7 @@ const UseState = () => {
 						setState({
 							...state,
 							confirmed: false,
+							inputValue: "",
 						});
 					}}
 				>
@@ -97,7 +98,23 @@ const UseState = () => {
 			</>
 		);
 	} else {
-		return <p>estado de eliminado</p>;
+		return (
+			<>
+				<p>Eliminado con éxito</p>
+				<button
+					onClick={() => {
+						setState({
+							...state,
+							confirmed: false,
+							deleted: false,
+							inputValue: "",
+						});
+					}}
+				>
+					Me arrepentí
+				</button>
+			</>
+		);
 	}
 };
 
