@@ -5,7 +5,7 @@ const SECURITY_CODE = "paradigma";
 const intialValue = {
 	error: false,
 	loading: false,
-	inputValue: "paradigma",
+	inputValue: "",
 	confirmed: false,
 	deleted: false,
 };
@@ -13,7 +13,7 @@ const intialValue = {
 // divide el reducer en dos, por un lado el objeto de referencia de los types
 // y por el otro el condicional, la función reducer propiamente dicha.
 
-const reducerObjectRef = (state, action) => ({
+const reducerObjectRef = (state, payload) => ({
 	ERROR: {
 		...state,
 		loading: false,
@@ -21,7 +21,7 @@ const reducerObjectRef = (state, action) => ({
 	},
 	INPUT_VALUE: {
 		...state,
-		inputValue: action.payload,
+		inputValue: payload,
 	},
 	CONFIRM: {
 		...state,
@@ -49,7 +49,7 @@ const reducerObjectRef = (state, action) => ({
 const reducerFunc = (state, action) => {
 	// si existe en el objeto una clave con el nombre del action type
 	if (reducerObjectRef(state)[action.type]) {
-		return reducerObjectRef(state)[action.type];
+		return reducerObjectRef(state, action.payload)[action.type];
 	} else {
 		return state;
 	}
@@ -60,7 +60,6 @@ const ReducerState = () => {
 	const [state, dispatch] = useReducer(reducerFunc, intialValue);
 
 	console.log(state);
-	console.log(state.loading);
 	// const onInputChange = newValue => {
 	// 	setState({
 	// 		...state,
@@ -90,7 +89,7 @@ const ReducerState = () => {
 	if (!state.confirmed && !state.deleted) {
 		return (
 			<div>
-				<h2>Eliminar UseState</h2>
+				<h2>Eliminar Reducer</h2>
 
 				{state.error && !state.loading && (
 					<p>Error: el código es incorrecto</p>
