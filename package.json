@@ -1,5 +1,5 @@
 {
-  "name": "my-vue-app",
+  "name": "state-management",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
