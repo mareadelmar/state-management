@@ -10,34 +10,44 @@ const intialValue = {
 	deleted: false,
 };
 
+// action types
+const actionTypes = {
+	error: "ERROR",
+	inputValue: "INPUT_VALUE",
+	confirm: "CONFIRM",
+	check: "CHECK",
+	delete: "DELETE",
+	reset: "RESET",
+};
+
 // divide el reducer en dos, por un lado el objeto de referencia de los types
 // y por el otro el condicional, la función reducer propiamente dicha.
 
 const reducerObjectRef = (state, payload) => ({
-	ERROR: {
+	[actionTypes.error]: {
 		...state,
 		loading: false,
 		error: true,
 	},
-	INPUT_VALUE: {
+	[actionTypes.inputValue]: {
 		...state,
 		inputValue: payload,
 	},
-	CONFIRM: {
+	[actionTypes.confirm]: {
 		...state,
 		error: false,
 		loading: false,
 		confirmed: true,
 	},
-	CHECK: {
+	[actionTypes.check]: {
 		...state,
 		loading: true,
 	},
-	DELETE: {
+	[actionTypes.delete]: {
 		...state,
 		deleted: true,
 	},
-	RESET: {
+	[actionTypes.reset]: {
 		...state,
 		loading: false,
 		confirmed: false,
@@ -75,13 +85,13 @@ const ReducerState = () => {
 				if (state.inputValue !== SECURITY_CODE) {
 					// al estado de error
 					//onError();
-					dispatch({ type: "ERROR" });
+					dispatch({ type: actionTypes.error });
 					console.log("holi");
 					return;
 				}
 				// al estado de confirmación
 				//onConfirm();
-				dispatch({ type: "CONFIRM" });
+				dispatch({ type: actionTypes.confirm });
 			}, 2000);
 		}
 	}, [state.loading]);
@@ -103,12 +113,12 @@ const ReducerState = () => {
 					value={state.inputValue}
 					onChange={e =>
 						dispatch({
-							type: "INPUT_VALUE",
+							type: actionTypes.inputValue,
 							payload: e.target.value,
 						})
 					}
 				/>
-				<button onClick={() => dispatch({ type: "CHECK" })}>
+				<button onClick={() => dispatch({ type: actionTypes.check })}>
 					Comprobar
 				</button>
 			</div>
@@ -117,10 +127,10 @@ const ReducerState = () => {
 		return (
 			<>
 				<p>¿estás segurx de eliminar?</p>
-				<button onClick={() => dispatch({ type: "DELETE" })}>
+				<button onClick={() => dispatch({ type: actionTypes.delete })}>
 					Sí, eliminar
 				</button>
-				<button onClick={() => dispatch({ type: "RESET" })}>
+				<button onClick={() => dispatch({ type: actionTypes.reset })}>
 					No, volver
 				</button>
 			</>
@@ -129,7 +139,7 @@ const ReducerState = () => {
 		return (
 			<>
 				<p>Eliminado con éxito</p>
-				<button onClick={() => dispatch({ type: "RESET" })}>
+				<button onClick={() => dispatch({ type: actionTypes.reset })}>
 					Me arrepentí
 				</button>
 			</>
