@@ -1,5 +1,9 @@
 import React, { useEffect, useReducer } from "react";
-import { initialValue, actionTypes, reducerFunc } from "./reducer/stateReducer";
+import {
+	initialValue,
+	actionTypes,
+	reducerFunc,
+} from "../reducer/stateReducer";
 
 const SECURITY_CODE = "paradigma";
 

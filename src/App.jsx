@@ -1,5 +1,5 @@
-import { FuncState } from "./FuncState";
-import { ReducerState } from "./ReducerState";
+import { FuncState } from "./components/FuncState";
+import { ReducerState } from "./components/ReducerState";
 import "./App.css";
 
 function App() {
