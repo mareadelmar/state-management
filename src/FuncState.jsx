@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const SECURITY_CODE = "paradigma";
 
-const UseState = () => {
+const FuncState = () => {
 	// estados independientes o simples
 	const [state, setState] = useState({
 		error: false,
@@ -116,4 +116,4 @@ const UseState = () => {
 	}
 };
 
-export { UseState };
+export { FuncState };
